@@ -3587,6 +3587,6 @@ textarea:focus {
     }
     
     .prices-table td.item-name::before {
-        margin-bottom: 2px;
+        display: none !important;
     }
 }
