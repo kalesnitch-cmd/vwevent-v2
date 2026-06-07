@@ -3389,5 +3389,81 @@ textarea:focus {
     }
 }
 
+/* ==========================================================================
+   14. SERVICE PAGE DECOR ELEMENTS & RESTAURANTS GRID
+   ========================================================================== */
+
+.element-card {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 35px 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(197, 168, 128, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.element-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(197, 168, 128, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 20px rgba(197, 168, 128, 0.05);
+}
+
+.element-card h4 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+}
+
+.element-card h4 i,
+.element-card h4 svg {
+    color: var(--primary);
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.element-card p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.restaurant-info-box {
+    max-width: 800px;
+    margin: 45px auto 0 auto;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.75) !important;
+    text-align: center;
+}
+
+.restaurant-info-box p {
+    margin-bottom: 20px;
+}
+
+.restaurant-info-box p:last-child {
+    margin-bottom: 0;
+}
+
+.restaurant-info-box strong {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+
 
 
