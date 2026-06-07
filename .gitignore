@@ -1,6 +1,11 @@
+node_modules
+dist
+dist-ssr
+*.local
 .vercel
 *.bak
 .env
 .env.*
 !.env.example
 presentation.html
+.DS_Store

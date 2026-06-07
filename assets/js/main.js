@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const setTodayDate = () => {
         const dateInput = document.getElementById('form-date');
-        const quizDateInput = document.getElementById('quiz-date');
         const today = new Date();
         const yyyy = today.getFullYear();
         let mm = today.getMonth() + 1;
@@ -106,10 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dateInput) {
             dateInput.value = formattedToday;
             dateInput.min = formattedToday;
-        }
-        if (quizDateInput) {
-            quizDateInput.value = formattedToday;
-            quizDateInput.min = formattedToday;
         }
     };
     
@@ -475,228 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* --- 7. Interactive Wedding Style Quiz --- */
-    const quizForm = document.getElementById('wedding-quiz-form');
-    const quizSteps = document.querySelectorAll('.quiz-step');
-    const quizStepNums = document.querySelectorAll('.quiz-steps-indicators .step-num');
-    const progressFill = document.querySelector('.quiz-progress-bar .progress-fill');
-    
-    const prevStepBtn = document.querySelector('.quiz-nav-btn.prev-step');
-    const nextStepBtn = document.querySelector('.quiz-nav-btn.next-step');
-    const submitQuizBtn = document.querySelector('.quiz-nav-btn.submit-quiz');
 
-    let activeStepIndex = 0; // 0-indexed corresponding to steps 1-5
-
-    const updateQuizUI = () => {
-        // Toggle steps visibility
-        quizSteps.forEach((step, idx) => {
-            step.classList.toggle('active', idx === activeStepIndex);
-        });
-
-        // Update progress bar
-        const progressPercentage = ((activeStepIndex + 1) / quizSteps.length) * 100;
-        if (progressFill) progressFill.style.width = `${progressPercentage}%`;
-
-        // Update step num indicators
-        quizStepNums.forEach((num, idx) => {
-            num.classList.toggle('active', idx === activeStepIndex);
-            num.classList.toggle('completed', idx < activeStepIndex);
-        });
-
-        // Toggle navigation buttons
-        if (activeStepIndex === 0) {
-            prevStepBtn.style.display = 'none';
-            nextStepBtn.style.display = 'inline-flex';
-            submitQuizBtn.style.display = 'none';
-        } else if (activeStepIndex === quizSteps.length - 1) { // Results screen (step 5)
-            prevStepBtn.style.display = 'inline-flex';
-            nextStepBtn.style.display = 'none';
-            submitQuizBtn.style.display = 'inline-flex';
-        } else {
-            prevStepBtn.style.display = 'inline-flex';
-            nextStepBtn.style.display = 'inline-flex';
-            submitQuizBtn.style.display = 'none';
-        }
-    };
-
-    const calculateQuizResult = () => {
-        // Extract selected answers
-        const location = document.querySelector('input[name="location"]:checked')?.value || 'banquet-hall';
-        const colors = document.querySelector('input[name="colors"]:checked')?.value || 'pastels';
-        const guests = document.querySelector('input[name="guests"]:checked')?.value || 'medium';
-        const vibe = document.querySelector('input[name="vibe"]:checked')?.value || 'classic';
-
-        // Result text containers
-        const resultStyleName = document.querySelector('.recommended-style-name');
-        const resultStyleDesc = document.querySelector('.recommended-style-desc');
-        const resultPriceVal = document.querySelector('.estimated-price');
-
-        // Logic variables
-        let recommendedStyle = "Классическая Элегантность";
-        let styleDesc = "Вашему выбору идеально соответствует торжественный классический декор с обилием цветов, хрустальными канделябрами, изящной сервировкой и теплым свечением сотен свечей.";
-        let estimatedPrice = "";
-
-        // Style Vibe Matching
-        if (vibe === 'classic') {
-            recommendedStyle = "Классическое Величие";
-            styleDesc = "Роскошный декор с обилием пышной флористики (розы, гортензии), зеркальными элементами, хрустальными люстрами и классическим убранством.";
-        } else if (vibe === 'modern') {
-            recommendedStyle = "Геометрический Модерн";
-            styleDesc = "Современный минимализм, строгие геометрические формы, игра света и неона, монохромные флористические акценты и стильные индустриальные детали.";
-        } else if (vibe === 'other-vibe') {
-            recommendedStyle = "Индивидуальный концепт";
-            styleDesc = "Вы выбрали собственный вариант атмосферы! Мы разработаем неповторимую концепцию оформления с нуля, учитывая ваши пожелания, выбранную локацию и цветовую гамму.";
-        } else if (vibe === 'cozy') {
-            recommendedStyle = "Уютный Ужин в Семейном кругу";
-            styleDesc = "Душевный камерный декор. Внимание к деталям: индивидуальные карточки меню, текстильные салфетки, эвкалипт и множество маленьких свечей.";
-        }
-
-        if (colors === 'other-color' && vibe !== 'other-vibe') {
-            styleDesc += " Цветовая гамма оформления будет полностью адаптирована под ваши пожелания.";
-        } else if (colors === 'white-crystal' && vibe === 'classic') {
-            styleDesc = "Хрустальный блеск и изысканная роскошь. Оформление с использованием прозрачных элементов, подвесных кристаллов, зеркал и белоснежной флористики.";
-        }
-
-        // Budget Estimation based on guests count and style factor
-        let baseCost = 280000;
-        if (guests === 'lite') {
-            baseCost = 120000;
-            estimatedPrice = `от 50 000 до 100 000 руб.`;
-        } else if (guests === 'medium') {
-            baseCost = 280000;
-            estimatedPrice = `от 100 000 до 200 000 руб.`;
-        } else if (guests === 'large') {
-            baseCost = 550000;
-            estimatedPrice = `от 200 000 до 350 000 руб.`;
-        } else if (guests === 'royal') {
-            baseCost = 900000;
-            estimatedPrice = `от 400 000+ руб. (Royal Custom)`;
-        }
-
-        // Write content to result screen
-        if (resultStyleName) resultStyleName.textContent = recommendedStyle;
-        if (resultStyleDesc) resultStyleDesc.textContent = styleDesc;
-        if (resultPriceVal) resultPriceVal.textContent = estimatedPrice;
-    };
-
-    if (quizForm && quizSteps.length > 0) {
-        // Next Button Click
-        if (nextStepBtn) {
-            nextStepBtn.addEventListener('click', () => {
-                if (activeStepIndex < quizSteps.length - 1) {
-                    activeStepIndex++;
-                    
-                    // If moving to results (step 5), compute values
-                    if (activeStepIndex === quizSteps.length - 1) {
-                        calculateQuizResult();
-                    }
-                    
-                    updateQuizUI();
-                }
-            });
-        }
-
-        // Prev Button Click
-        if (prevStepBtn) {
-            prevStepBtn.addEventListener('click', () => {
-                if (activeStepIndex > 0) {
-                    activeStepIndex--;
-                    updateQuizUI();
-                }
-            });
-        }
-
-        // Quiz Submission
-        quizForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('quiz-name').value;
-            const phone = document.getElementById('quiz-phone').value;
-            const date = document.getElementById('quiz-date')?.value || '';
-            const preference = document.querySelector('input[name="quiz-contact-preference"]:checked')?.value || 'whatsapp';
-            const style = document.querySelector('.recommended-style-name')?.textContent || '';
-            const budget = document.querySelector('.estimated-price')?.textContent || '';
-
-            // Extract raw answer text labels to send to Telegram
-            const locationEl = document.querySelector('input[name="location"]:checked')?.closest('.quiz-option')?.querySelector('.option-title');
-            const colorEl = document.querySelector('input[name="colors"]:checked')?.closest('.quiz-option')?.querySelector('.option-title');
-            const guestsEl = document.querySelector('input[name="guests"]:checked')?.closest('.quiz-option')?.querySelector('.option-title');
-            const vibeEl = document.querySelector('input[name="vibe"]:checked')?.closest('.quiz-option')?.querySelector('.option-title');
-            
-            const answersText = {
-                location: locationEl?.textContent?.trim() || '',
-                color: colorEl?.textContent?.trim() || '',
-                guests: guestsEl?.textContent?.trim() || '',
-                vibe: vibeEl?.textContent?.trim() || ''
-            };
-
-            // Play notification chime
-            playNotificationSound();
-
-            // Send notification to Telegram bot
-            fetch('https://verywell-decor.vercel.app/api/send-notification', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    type: 'quiz',
-                    name,
-                    phone,
-                    date,
-                    style,
-                    budget,
-                    preference,
-                    answers: answersText
-                })
-            }).catch(err => console.error('Telegram notification error:', err));
-            
-            // Show Success Modal
-            const successModal = document.getElementById('success-modal');
-            const successMsg = document.getElementById('success-message');
-            
-            if (successModal) {
-                if (successMsg) {
-                    successMsg.innerHTML = `Спасибо, <strong>${name}</strong>! Мы получили ваши ответы по квизу. Мы свяжемся с вами по номеру <strong>${phone}</strong> в течение 2 часов с готовым индивидуальным расчетом сметы и разбором стиля.`;
-                }
-                successModal.classList.add('active');
-            }
-
-            // Reset Quiz
-            quizForm.reset();
-            activeStepIndex = 0;
-            updateQuizUI();
-        });
-    }
-
-
-    /* --- 8. Pricing Package Autofil into Contact Form --- */
-    const packageSelect = document.getElementById('form-package');
-    const selectPackageBtns = document.querySelectorAll('.select-package');
-
-    if (packageSelect && selectPackageBtns.length > 0) {
-        selectPackageBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const packageName = btn.getAttribute('data-package');
-                
-                // Map names to select values
-                if (packageName.includes('LITE')) {
-                    packageSelect.value = 'lite';
-                } else if (packageName.includes('PREMIUM')) {
-                    packageSelect.value = 'premium';
-                } else if (packageName.includes('ROYAL')) {
-                    packageSelect.value = 'royal';
-                }
-                
-                // Scroll to contacts
-                const contactSection = document.getElementById('contacts');
-                if (contactSection) {
-                    window.scrollTo({
-                        top: contactSection.offsetTop - 80, // Offset for header
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    }
 
 
     /* --- 9. Contact Form Submission --- */
@@ -709,7 +483,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('form-name').value;
             const phone = document.getElementById('form-phone').value;
             const date = document.getElementById('form-date').value;
-            const packageVal = document.getElementById('form-package').options[document.getElementById('form-package').selectedIndex].text;
+            const packageEl = document.getElementById('form-package');
+            const packageVal = packageEl ? packageEl.options[packageEl.selectedIndex].text : (document.querySelector('h1')?.textContent || 'С сайта');
             const message = document.getElementById('form-message').value;
             const preference = document.querySelector('input[name="contact-preference"]:checked')?.value || 'whatsapp';
 
@@ -972,6 +747,101 @@ document.addEventListener('DOMContentLoaded', () => {
             cookieNotice.classList.remove('show');
         });
     }
+
+    /* --- 17. Interactive Service Sliders --- */
+    const serviceSliders = document.querySelectorAll('.service-slider');
+    serviceSliders.forEach(slider => {
+        const slides = slider.querySelectorAll('.service-slide');
+        if (slides.length <= 1) return;
+        
+        let currentIdx = 0;
+        setInterval(() => {
+            slides[currentIdx].classList.remove('active');
+            currentIdx = (currentIdx + 1) % slides.length;
+            slides[currentIdx].classList.add('active');
+        }, 5000);
+    });
+    /* --- 18. Auto-scroll Reviews on Mobile --- */
+    const reviewsGrid = document.querySelector('#homepage-reviews .reviews-grid');
+    if (reviewsGrid) {
+        let slideIndex = 0;
+        const totalSlides = 3;
+
+        const autoSlideReviews = () => {
+            if (window.innerWidth <= 768) {
+                slideIndex = (slideIndex + 1) % totalSlides;
+                const cardWidth = reviewsGrid.clientWidth;
+                reviewsGrid.scrollTo({
+                    left: slideIndex * cardWidth,
+                    behavior: 'smooth'
+                });
+            }
+        };
+
+        let autoSlideInterval = setInterval(autoSlideReviews, 10000);
+
+        reviewsGrid.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768) {
+                clearInterval(autoSlideInterval);
+                const cardWidth = reviewsGrid.clientWidth;
+                if (cardWidth > 0) {
+                    slideIndex = Math.round(reviewsGrid.scrollLeft / cardWidth);
+                }
+                autoSlideInterval = setInterval(autoSlideReviews, 10000);
+            }
+        }, { passive: true });
+    }
+    /* --- 19. Set Active Navigation Link based on URL --- */
+    const setActiveNavLink = () => {
+        let currentPath = window.location.pathname;
+        
+        // Normalize paths (remove trailing slashes, file extensions, and handle index paths)
+        if (currentPath === '' || currentPath === '/' || currentPath === '/index' || currentPath.endsWith('/index.html') || currentPath.endsWith('/index')) {
+            currentPath = '/';
+        } else {
+            // Remove trailing slash if exists
+            currentPath = currentPath.replace(/\/$/, "");
+            // Remove .html extension if exists
+            currentPath = currentPath.replace(/\.html$/, "");
+            if (currentPath === '/index') {
+                currentPath = '/';
+            }
+        }
+
+        const matchLink = (linkSelector) => {
+            const navLinks = document.querySelectorAll(linkSelector);
+            navLinks.forEach(link => {
+                let href = link.getAttribute('href');
+                if (!href) return;
+                
+                // Normalize href
+                if (href === '/' || href === '' || href === '/index' || href.endsWith('/index.html') || href.endsWith('/index')) {
+                    href = '/';
+                } else {
+                    href = href.replace(/\/$/, "").replace(/\.html$/, "");
+                    if (href === '/index') {
+                        href = '/';
+                    }
+                }
+
+                // Check if current path matches or starts with href
+                let isMatch = false;
+                if (href === '/') {
+                    isMatch = currentPath === '/';
+                } else {
+                    // Match exact path or subpages
+                    isMatch = currentPath === href || currentPath.startsWith(href + '/');
+                }
+
+                link.classList.toggle('active', isMatch);
+            });
+        };
+
+        matchLink('.desktop-nav .nav-link');
+        matchLink('.mobile-nav .mobile-nav-link');
+    };
+
+    setActiveNavLink();
 
     /* --- 12. Initialize Icons --- */
     if (typeof lucide !== 'undefined') {
