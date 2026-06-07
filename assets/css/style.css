@@ -317,6 +317,10 @@ ul {
     border: 1px solid var(--primary);
 }
 
+.dark-theme .btn-outline {
+    color: #ffffff;
+}
+
 .btn-outline:hover {
     background: var(--primary);
     color: var(--light-bg);
@@ -3443,7 +3447,7 @@ textarea:focus {
 
 .restaurant-info-box {
     max-width: 800px;
-    margin: 45px auto 0 auto;
+    margin: 30px auto 0 auto;
     font-family: var(--font-sans);
     font-size: 1.05rem;
     line-height: 1.8;
