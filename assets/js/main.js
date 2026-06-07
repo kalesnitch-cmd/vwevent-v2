@@ -690,6 +690,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+
+        // Auto-expand and scroll to album from hash in URL (e.g. portfolio.html#album-arch)
+        const handleHashAlbum = () => {
+            const hash = window.location.hash;
+            if (hash) {
+                try {
+                    const targetAlbum = document.querySelector(hash);
+                    if (targetAlbum && targetAlbum.classList.contains('album-container')) {
+                        if (!targetAlbum.classList.contains('expanded')) {
+                            const toggleBtn = targetAlbum.querySelector('.toggle-album-btn');
+                            if (toggleBtn) {
+                                toggleBtn.click();
+                            } else {
+                                targetAlbum.classList.add('expanded');
+                            }
+                        }
+                        setTimeout(() => {
+                            targetAlbum.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 250);
+                    }
+                } catch (err) {
+                    console.warn("Invalid selector for hash:", hash, err);
+                }
+            }
+        };
+
+        window.addEventListener('load', handleHashAlbum);
+        window.addEventListener('hashchange', handleHashAlbum);
     }
 
     /* --- 14. Floating Back to Top Button --- */

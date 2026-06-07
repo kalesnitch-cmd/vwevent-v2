@@ -1773,7 +1773,7 @@ textarea:focus {
 
 .contact-detail-item .val {
     font-family: var(--font-sans);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     color: var(--text-dark);
     font-weight: 600;
     letter-spacing: -0.3px;
@@ -3329,5 +3329,56 @@ textarea:focus {
         order: 1 !important;
     }
 }
+
+/* --- Service Gallery Grid --- */
+.service-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 3/2;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(197, 168, 128, 0.15);
+    transition: var(--transition-smooth);
+}
+
+.service-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.service-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.service-gallery-action {
+    text-align: center;
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .service-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 35px;
+    }
+    .service-gallery-action {
+        margin-top: 30px;
+    }
+}
+
 
 
