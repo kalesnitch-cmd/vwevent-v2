@@ -793,44 +793,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     /* --- 19. Set Active Navigation Link based on URL --- */
     const setActiveNavLink = () => {
-        let currentPath = window.location.pathname;
+        const currentUrl = new URL(window.location.href);
+        let currentPath = currentUrl.pathname.replace(/\/$/, "").replace(/\.html$/, "");
         
-        // Normalize paths (remove trailing slashes, file extensions, and handle index paths)
-        if (currentPath === '' || currentPath === '/' || currentPath === '/index' || currentPath.endsWith('/index.html') || currentPath.endsWith('/index')) {
+        // Normalize directory prefix /vwevent-v2
+        currentPath = currentPath.replace(/^\/vwevent-v2/, "");
+        if (currentPath === '' || currentPath === '/index') {
             currentPath = '/';
-        } else {
-            // Remove trailing slash if exists
-            currentPath = currentPath.replace(/\/$/, "");
-            // Remove .html extension if exists
-            currentPath = currentPath.replace(/\.html$/, "");
-            if (currentPath === '/index') {
-                currentPath = '/';
-            }
         }
 
         const matchLink = (linkSelector) => {
             const navLinks = document.querySelectorAll(linkSelector);
             navLinks.forEach(link => {
-                let href = link.getAttribute('href');
-                if (!href) return;
+                // Use link.href which contains the fully resolved absolute URL by the browser
+                let linkPath = "";
+                try {
+                    const linkUrl = new URL(link.href);
+                    linkPath = linkUrl.pathname.replace(/\/$/, "").replace(/\.html$/, "");
+                } catch (e) {
+                    return;
+                }
                 
-                // Normalize href
-                if (href === '/' || href === '' || href === '/index' || href.endsWith('/index.html') || href.endsWith('/index')) {
-                    href = '/';
-                } else {
-                    href = href.replace(/\/$/, "").replace(/\.html$/, "");
-                    if (href === '/index') {
-                        href = '/';
-                    }
+                // Normalize directory prefix /vwevent-v2
+                linkPath = linkPath.replace(/^\/vwevent-v2/, "");
+                if (linkPath === '' || linkPath === '/index') {
+                    linkPath = '/';
                 }
 
-                // Check if current path matches or starts with href
+                // Check if current path matches or starts with linkPath
                 let isMatch = false;
-                if (href === '/') {
+                if (linkPath === '/') {
                     isMatch = currentPath === '/';
                 } else {
                     // Match exact path or subpages
-                    isMatch = currentPath === href || currentPath.startsWith(href + '/');
+                    isMatch = currentPath === linkPath || currentPath.startsWith(linkPath + '/');
                 }
 
                 link.classList.toggle('active', isMatch);
