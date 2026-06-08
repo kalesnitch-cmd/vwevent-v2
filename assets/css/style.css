@@ -32,7 +32,7 @@
     
     /* Typography */
     --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-sans: OurFont, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
     --font-display: var(--font-serif);
     
     /* Layout Details */
@@ -3480,7 +3480,7 @@ textarea:focus {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: var(--font-sans);
     margin-bottom: 20px;
 }
 
@@ -3589,4 +3589,9 @@ textarea:focus {
     .prices-table td.item-name::before {
         display: none !important;
     }
+}
+
+/* --- Global override for inline styles using Plus Jakarta Sans --- */
+[style*="Plus Jakarta Sans"] {
+    font-family: OurFont, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif !important;
 }
