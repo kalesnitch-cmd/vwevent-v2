@@ -4,22 +4,22 @@
 import '../css/dome-gallery.css';
 
 const DEFAULT_IMAGES = [
-  { src: '/assets/images/portfolio/arki/-oOiQOjJn1wHHlK2Yhjqrc5yigLMxkXEO4eeJpvHdG33v-sD2Uf_bkHyQbPBCPyl5SCjI-o_tVlrYC50rVBt-VAj.webp', alt: 'Стильная фотозона с полуарками и подсветкой' },
-  { src: '/assets/images/portfolio/arki/CoQGZ825-p3idCK36eh7KkLB3InGus7a119zBn9zJscsmKiv6Bfv2leo2TReUM6-tAvj2Rl7PMUKrBfraL1ZLQDq.webp', alt: 'Белая резная арка с нежной флористикой' },
-  { src: '/assets/images/portfolio/arki/Ha5b8WlmieUBLJPuMDbJjGKsrRDn0nIbE0hjTRFlSPBdvc9vYuIIunZaZuxlLbGUePiYkCKl4tzIEEyI23n5X3X9.webp', alt: 'Тематическая зимняя фотозона' },
-  { src: '/assets/images/portfolio/arki/Nr0ksV7f_iQAyxNiESiIQtcTVT48NVpLAeSxhjYptUZ69WBShPCHrN09OHp8Z_jTGI9eknFw6vmncglPSUWqKzdj.webp', alt: 'Минималистичный задник с золотым символом любви' },
-  { src: '/assets/images/portfolio/arki/PmIHVugM-j_dwQyK4PAMAYNA0iRcVNgj2E8U4w6YUNt8JPcgHm7_v-fexaWXmaocJS1bXFwMIv8nBWBK6kNvGQLL.webp', alt: 'Тонкие дизайнерские светильники-свечи на президиуме' },
-  { src: '/assets/images/portfolio/arki/QuPJuilvvheEhmI1AwwXxsrwo67LkDxtt5XaJmteVbhg0KTfuE82HKGEns9u70giO0_-G9okoem0PZui7OIlFusO.webp', alt: 'Круглая свадебная арка с вечерней подсветкой' },
-  { src: '/assets/images/portfolio/arki/ZBT0pACh-R1mnaPi2F8gJSDnx9Jk044ANA6lxnQ0O9Laycbb3qTbpsV08V8PDDxhWTnBKPy_uhbJGkyV_q102K17.webp', alt: 'Насыщенная бархатная фотозона со световым акцентом' },
-  { src: '/assets/images/portfolio/arki/decor_13.webp', alt: 'Многослойный белый задник с розовыми акцентами' },
-  { src: '/assets/images/portfolio/arki/decor_17.webp', alt: 'Стильная черно-белая зона с объемной флористикой' },
-  { src: '/assets/images/portfolio/arki/decor_18.webp', alt: 'Высокая полукруглая арка с белыми цветами' },
-  { src: '/assets/images/portfolio/arki/decor_2.webp', alt: 'Текстильное оформление арки на природе' },
-  { src: '/assets/images/portfolio/arki/decor_28.webp', alt: 'Свадебная арка в окружении парковой зелени' },
-  { src: '/assets/images/portfolio/arki/decor_3.webp', alt: 'Контрастная фотозона с теплыми напольными свечами' },
-  { src: '/assets/images/portfolio/arki/decor_30.webp', alt: 'Крупный план президиума с глянцевым золотом и неоном' },
-  { src: '/assets/images/portfolio/arki/decor_31.webp', alt: 'Пышная цветочная арка в сиренево-фиолетовых тонах' },
-  { src: '/assets/images/portfolio/arki/decor_34.webp', alt: 'Монохромная белоснежная арка с хрустальными нитями' }
+  { src: 'assets/images/portfolio/arki/-oOiQOjJn1wHHlK2Yhjqrc5yigLMxkXEO4eeJpvHdG33v-sD2Uf_bkHyQbPBCPyl5SCjI-o_tVlrYC50rVBt-VAj.webp', alt: 'Стильная фотозона с полуарками и подсветкой' },
+  { src: 'assets/images/portfolio/arki/CoQGZ825-p3idCK36eh7KkLB3InGus7a119zBn9zJscsmKiv6Bfv2leo2TReUM6-tAvj2Rl7PMUKrBfraL1ZLQDq.webp', alt: 'Белая резная арка с нежной флористикой' },
+  { src: 'assets/images/portfolio/arki/Ha5b8WlmieUBLJPuMDbJjGKsrRDn0nIbE0hjTRFlSPBdvc9vYuIIunZaZuxlLbGUePiYkCKl4tzIEEyI23n5X3X9.webp', alt: 'Тематическая зимняя фотозона' },
+  { src: 'assets/images/portfolio/arki/Nr0ksV7f_iQAyxNiESiIQtcTVT48NVpLAeSxhjYptUZ69WBShPCHrN09OHp8Z_jTGI9eknFw6vmncglPSUWqKzdj.webp', alt: 'Минималистичный задник с золотым символом любви' },
+  { src: 'assets/images/portfolio/arki/PmIHVugM-j_dwQyK4PAMAYNA0iRcVNgj2E8U4w6YUNt8JPcgHm7_v-fexaWXmaocJS1bXFwMIv8nBWBK6kNvGQLL.webp', alt: 'Тонкие дизайнерские светильники-свечи на президиуме' },
+  { src: 'assets/images/portfolio/arki/QuPJuilvvheEhmI1AwwXxsrwo67LkDxtt5XaJmteVbhg0KTfuE82HKGEns9u70giO0_-G9okoem0PZui7OIlFusO.webp', alt: 'Круглая свадебная арка с вечерней подсветкой' },
+  { src: 'assets/images/portfolio/arki/ZBT0pACh-R1mnaPi2F8gJSDnx9Jk044ANA6lxnQ0O9Laycbb3qTbpsV08V8PDDxhWTnBKPy_uhbJGkyV_q102K17.webp', alt: 'Насыщенная бархатная фотозона со световым акцентом' },
+  { src: 'assets/images/portfolio/arki/decor_13.webp', alt: 'Многослойный белый задник с розовыми акцентами' },
+  { src: 'assets/images/portfolio/arki/decor_17.webp', alt: 'Стильная черно-белая зона с объемной флористикой' },
+  { src: 'assets/images/portfolio/arki/decor_18.webp', alt: 'Высокая полукруглая арка с белыми цветами' },
+  { src: 'assets/images/portfolio/arki/decor_2.webp', alt: 'Текстильное оформление арки на природе' },
+  { src: 'assets/images/portfolio/arki/decor_28.webp', alt: 'Свадебная арка в окружении парковой зелени' },
+  { src: 'assets/images/portfolio/arki/decor_3.webp', alt: 'Контрастная фотозона с теплыми напольными свечами' },
+  { src: 'assets/images/portfolio/arki/decor_30.webp', alt: 'Крупный план президиума с глянцевым золотом и неоном' },
+  { src: 'assets/images/portfolio/arki/decor_31.webp', alt: 'Пышная цветочная арка в сиренево-фиолетовых тонах' },
+  { src: 'assets/images/portfolio/arki/decor_34.webp', alt: 'Монохромная белоснежная арка с хрустальными нитями' }
 ];
 
 const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
