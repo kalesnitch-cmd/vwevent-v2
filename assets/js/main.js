@@ -1,6 +1,7 @@
 /* ==========================================================================
    VERY WELL DÉCOR — INTERACTIVE MAIN JS
    ========================================================================== */
+import './dome-gallery.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
